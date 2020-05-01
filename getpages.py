@@ -14,3 +14,5 @@ class Getpages:
         self.driver.get('https://www.instagram.com/python.learning')
         flw_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#react-root > section > main > div > header > section > ul > li:nth-child(2) > a')))
         flw_btn.click()
+        popup = WebDriverWait(self.driver, 10). until(EC.presence_of_element_located((By.XPATH, '/html/body/div[4]/div/div[2]')))
+        self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', popup)

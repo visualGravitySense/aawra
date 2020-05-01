@@ -7,8 +7,8 @@ import time
 import login
 import getpages
 
-username = 'NAME'
-password = 'PASS'
+username = 'name'
+password = 'pass'
 driver = 0
 def main():
     global driver
@@ -19,7 +19,7 @@ def main():
 
     gp = getpages.Getpages(driver)
     gp.get_followers()
-    time.sleep(60)
+    time.sleep(10)
 
 if __name__ == '__main__':
     main()
