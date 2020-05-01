@@ -17,11 +17,9 @@ class Login:
         uid.click()
         uid.send_keys(self.username)
 
-
         pswd = self.driver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(3) > div > label > input')
         pswd.click()
         pswd.send_keys(self.password)
-
 
         btn = self.driver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(4) > button > div')
         btn.click()

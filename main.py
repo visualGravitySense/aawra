@@ -7,8 +7,8 @@ import time
 import login
 import getpages
 
-username = 'username'
-password = 'pass'
+username = 'NAME'
+password = 'PASS'
 driver = 0
 def main():
     global driver
@@ -17,9 +17,9 @@ def main():
     l = login.Login(driver, username, password)
     l.signin()
 
-    driver.get('https://www.instagram.com/python.learning/')
     gp = getpages.Getpages(driver)
     gp.get_followers()
+    time.sleep(60)
 
 if __name__ == '__main__':
     main()
