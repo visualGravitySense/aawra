@@ -8,7 +8,11 @@ import time
 class Getpages:
     def __init__(self, driver):
         self.driver = driver
-
+            # 12 pages/laoded
+    def get_num_flw(self):
+        flw = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#react-root > section > main')))
+        sflw = b(flw.get_attribute('innerHTML'), 'html.parser')
+        print(sflw)
     def get_followers(self):
         print('get followers')
         self.driver.get('https://www.instagram.com/python.learning')
