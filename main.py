@@ -18,12 +18,10 @@ def main():
     l.signin()
 
     gp = getpages.Getpages(driver)
-    gp.get_num_flw()
-    time.sleep(10)
+    print(gp.get_num_flw())
 
     gp = getpages.Getpages(driver)
     gp.get_followers()
-    time.sleep(10)
 
 if __name__ == '__main__':
     main()

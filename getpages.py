@@ -16,7 +16,15 @@ class Getpages:
         sflw = b(flw.get_attribute('innerHTML'), 'html.parser')
         followers = sflw.findAll('span', {'class':'g47SY'})
         f = followers[1].getText().replace(',', '')
-        print(f)
+        if 'k' in f:
+            f = float(f[:-1]) * 10**3
+            return f
+        elif 'm' in f:
+            f = float(f[:-1]) * 10**6
+            return f
+        else:
+            return float(f)
+
     def get_followers(self):
         print('get followers')
         flw_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#react-root > section > main > div > header > section > ul > li:nth-child(2) > a')))
