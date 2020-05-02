@@ -7,8 +7,8 @@ import time
 import login
 import getpages
 
-username = 'name'
-password = 'pass'
+username = ''
+password = ''
 driver = 0
 def main():
     global driver
