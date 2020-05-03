@@ -21,7 +21,8 @@ def main():
     print(gp.get_num_flw())
 
     gp = getpages.Getpages(driver)
-    gp.get_followers()
+    print(gp.get_followers())
+    print(gp.get_num_flw())
 
 if __name__ == '__main__':
     main()

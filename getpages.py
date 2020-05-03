@@ -8,12 +8,14 @@ import time
 class Getpages:
     def __init__(self, driver):
         self.driver = driver
-            # 12 pages/laoded
+        self.driver.get('https://www.instagram.com/python.learning')
+        self.hrefs = []
+
     def get_num_flw(self):
         print('followers number')
-        self.driver.get('https://www.instagram.com/python.learning')
         flw = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#react-root > section > main')))
         sflw = b(flw.get_attribute('innerHTML'), 'html.parser')
+        print(sflw)
         followers = sflw.findAll('span', {'class':'g47SY'})
         f = followers[1].getText().replace(',', '')
         if 'k' in f:
@@ -40,13 +42,23 @@ class Getpages:
             self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight/{}'.format(str(11-h)), self.popup)
             if h == 5:
                 break
-        for i in range(15):
+
+        for i in range(5):
             time.sleep(2)
             self.driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', self.popup)
         self.popup = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '/html/body/div[4]/div/div[2]')))
         b_popup = b(self.popup.get_attribute('innerHTML'), 'html.parser')
         for p in b_popup.findAll('li', {'class': 'wo9IH'}):
-            print(p.findAll('a'))
+            try:
+                hlink = p.find_all('a')[0]['href']
+                if 'div' in hlink:
+                    return self.hrefs
+                else:
+                    self.hrefs.append(hlink)
+            except:
+                print(p.find_all('a')[0])
+                pass
+        return self.hrefs
 
     def is_public(self):
         try:
@@ -63,4 +75,12 @@ class Getpages:
         h = b(html, 'html.parser')
         href = h['href']
         self.driver.get('https://www.instagram.com' + href)
-        like_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((by.CSS_SELECTOR 'body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > svg > path')))
+        like_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > svg > path')))
+        like_btn.click()
+    def follow_page(self):
+        follow = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]/div/span/span[1]/button')))
+        f_text = follow.text
+        if f_text.lowercase() == 'follow' or f_text.lowercase() == 'follow back':
+            follow.click()
+        elif f_text == 'already following':
+            print('already following')
