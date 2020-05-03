@@ -56,7 +56,6 @@ class Getpages:
                 else:
                     self.hrefs.append(hlink)
             except:
-                print(p.find_all('a')[0])
                 pass
         return self.hrefs
 
