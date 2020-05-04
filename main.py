@@ -21,8 +21,6 @@ def main():
     l = login.Login(driver, username, password)
     l.signin()
     gp = getpages.Getpages(driver)
-    print(gp.get_num_flw())
-    gp = getpages.Getpages(driver)
     refs = gp.get_followers()
     print(gp.get_num_flw())
     run_bot(refs, driver, gp)

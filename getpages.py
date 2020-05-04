@@ -56,6 +56,7 @@ class Getpages:
                 else:
                     self.hrefs.append(hlink)
             except:
+                #print(p.find_all('a')[0])
                 pass
         return self.hrefs
 
@@ -76,8 +77,9 @@ class Getpages:
         self.driver.get('https://www.instagram.com' + href)
         like_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#react-root > section > main > div > div.ltEKP > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > svg')))
         like_btn.click()
+
     def follow_page(self):
-        follow = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]/button')))
+        follow = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]')))
         f_text = follow.text
         if f_text.lower() == 'follow' or f_text.lower() == 'follow back':
             follow.click()
