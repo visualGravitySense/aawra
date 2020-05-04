@@ -69,17 +69,18 @@ class Getpages:
         except:
             return True
     def like_post(self):
-        post = self.driver.find_element_by_css_selector('#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) > a')
+        post = self.driver.find_element_by_css_selector('#react-root > section > main > div > div._2z6nI > article > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1)')
         html = post.get_attribute('innerHTML')
         h = b(html, 'html.parser')
-        href = h['href']
+        href = h.a['href']
         self.driver.get('https://www.instagram.com' + href)
-        like_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > svg > path')))
+        like_btn = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, '#react-root > section > main > div > div.ltEKP > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > svg')))
         like_btn.click()
     def follow_page(self):
-        follow = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]/div/span/span[1]/button')))
+        follow = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="react-root"]/section/main/div/header/section/div[2]/button')))
         f_text = follow.text
-        if f_text.lowercase() == 'follow' or f_text.lowercase() == 'follow back':
+        if f_text.lower() == 'follow' or f_text.lower() == 'follow back':
             follow.click()
         elif f_text == 'already following':
             print('already following')
+        time.sleep(1)
